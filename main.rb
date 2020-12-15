@@ -15,13 +15,18 @@ class BusStopReader
   end
 
   def printNextBus
-    puts "\nNext Bus:\n+++++++++"
     uri = URI('https://www.metroinfo.co.nz/api/nextbus')
     uri.query = URI.encode_www_form(:PlatformTag => @stop)
 
     responseRaw = Net::HTTP.get(uri)
     response = Nokogiri::XML(responseRaw).remove_namespaces!
+    platform = response.xpath("//Platform")
+    puts "+++++++++"
+    puts "Stop: " + platform.first.attributes["Name"].value
+    puts "\nNext Bus:\n+++++++++"
+
     routes = response.xpath("//Route")
+    
 
     routes.each do |route|
       busNo = route.attributes["RouteNo"].value
