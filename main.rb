@@ -10,7 +10,7 @@ class BusStopReader
 
   def initialize
     @bus = "17"
-    @stop = "654"
+    @stop = "917" #PlatformNo 41896
     @returnAll = true
   end
 
