@@ -15,36 +15,38 @@ class BusStopReader
   end
 
   def printNextBus
+    outputStr = '';
     uri = URI('https://www.metroinfo.co.nz/api/nextbus')
     uri.query = URI.encode_www_form(:PlatformTag => @stop)
 
     responseRaw = Net::HTTP.get(uri)
     response = Nokogiri::XML(responseRaw).remove_namespaces!
     platform = response.xpath("//Platform")
-    puts "+++++++++"
-    puts "Stop: " + platform.first.attributes["Name"].value
-    puts "\nNext Bus:\n+++++++++"
+    outputStr += "+++++++++\n"
+    outputStr += "Stop: #{platform.first.attributes["Name"].value}\n"
+    outputStr += "\nNext Bus:\n+++++++++\n"
 
     routes = response.xpath("//Route")
-    
+
 
     routes.each do |route|
       busNo = route.attributes["RouteNo"].value
 
       if (@returnAll || busNo == @bus)
 
-        puts busNo + "|\n---"
+        outputStr += busNo + "|\n---\n"
         trips = route.children[1].children
         i = 1
 
         while i < trips.size()
-          puts "     #{trips[i].attributes["ETA"].value}m"
+          outputStr += "     #{trips[i].attributes["ETA"].value}m\n"
           i += 2
         end
 
-        puts "========"
+        outputStr += "========\n\n"
         break unless @returnAll
       end
+      print outputStr
     end
   end
 
@@ -82,5 +84,10 @@ end
 
 busReader = BusStopReader.new
 busReader.parseArgs
-busReader.printNextBus
+
+while true
+  busReader.printNextBus
+  sleep(30)
+  puts "\e[H\e[2J"
+end
 
