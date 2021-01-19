@@ -46,8 +46,8 @@ class BusStopReader
         outputStr += "========\n\n"
         break unless @returnAll
       end
-      print outputStr
     end
+    print outputStr
   end
 
   def parseArgs
@@ -89,5 +89,11 @@ while true
   busReader.printNextBus
   sleep(30)
   puts "\e[H\e[2J"
+
+  # Do things
+  # Like stdin read to start platform search
+  # Or other cool things
+  # Look into syswide commands
+
 end
 
