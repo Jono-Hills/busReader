@@ -34,16 +34,16 @@ class BusStopReader
 
       if (@returnAll || busNo == @bus)
 
-        outputStr += busNo + "|\n---\n"
         trips = route.children[1].children
         i = 1
 
         while i < trips.size()
-          outputStr += "     #{trips[i].attributes["ETA"].value}m\n"
+          trip = trips[i]
+          outputStr += "#{'%-2d'%busNo}|" + getDurationString(trip) + "\n"
           i += 2
-        end
 
-        outputStr += "========\n\n"
+        end
+        outputStr += "  |------------\n"
         break unless @returnAll
       end
     end
@@ -71,6 +71,18 @@ class BusStopReader
   def getArgValue(arg)
     raise ArgumentError.new(arg[0]) if arg.length != 2
     arg[1]
+  end
+
+  def getDurationString(trip)
+    durationString = ' ' * 10
+    timeLeft = Integer(trip.attributes["ETA"].value)
+    if timeLeft >= 10
+      durationString += '🚌'
+    else
+      durationString.insert(timeLeft, '🚌')
+    end
+    durationString += " #{trip.attributes["ETA"].value}m"
+    return durationString
   end
 end
 
