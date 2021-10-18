@@ -5,6 +5,7 @@ Bus reader innit
 
 
 # Bus Reader
+## nextBus
 
 Returns the next expected buses for a particular stop and displays how far away they are.
 ```
@@ -23,7 +24,7 @@ Next Bus:
 
 ```
 
-## Usage
+### Usage
 
 `ruby nextBus.rb`
 
@@ -49,3 +50,23 @@ With no args provided it is hardcoded to a particular stop.
 3 - Bus Exchange Platform C
 4 - Bus Exchange Platform D
 654 - Wairakei Rd near Blighs (outside flat basically lol)
+
+
+## findStop
+
+Returns a list of bus stops with their platform tag numbers when provided with a search term such as a street.
+
+```
+ruby findStop.rb Creyke Rd
+Creyke Rd 1918
+Creyke Rd 1922
+Creyke Rd near Clyde Rd 2921
+Creyke Rd near Barlow St 1921
+```
+### Usage
+`ruby findStop.rb` 
+### Args
+Searches whatever args are provided after the filename. Quotes not required
+
+e.g. `ruby findStop.rb Cranford St` returns all stops on Cranford St. 
+
