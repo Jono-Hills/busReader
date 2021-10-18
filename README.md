@@ -8,7 +8,7 @@ Bus reader innit
 
 Returns the next expected buses for a particular stop and displays how far away they are.
 ```
-> ruby main.rb --stop=4
+> ruby nextBus.rb --stop=4
 +++++++++
 Stop: Bus Interchange (Platform D)
 
@@ -25,7 +25,7 @@ Next Bus:
 
 ## Usage
 
-`ruby main.rb`
+`ruby nextBus.rb`
 
 This command can then be aliased in terminal config;
 

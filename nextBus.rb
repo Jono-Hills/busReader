@@ -31,6 +31,9 @@ class BusStopReader
 
     routes.each do |route|
       busNo = route.attributes["RouteNo"].value
+      # make map here
+      # sort by time instead of number
+      # print to string
 
       if (@returnAll || busNo == @bus)
 
@@ -43,7 +46,7 @@ class BusStopReader
           i += 2
 
         end
-        outputStr += "  |------------\n"
+        outputStr += "  |----------------------\n"
         break unless @returnAll
       end
     end
@@ -74,9 +77,9 @@ class BusStopReader
   end
 
   def getDurationString(trip)
-    durationString = ' ' * 10
-    timeLeft = Integer(trip.attributes["ETA"].value)
-    if timeLeft >= 10
+    durationString = ' ' * 20
+    timeLeft = Integer(trip.attributes["ETA"].value).floor
+    if timeLeft >= 20
       durationString += '🚌'
     else
       durationString.insert(timeLeft, '🚌')
@@ -99,13 +102,18 @@ busReader.parseArgs
 
 while true
   busReader.printNextBus
+
   sleep(30)
   puts "\e[H\e[2J"
 
   # Do things
   # Like stdin read to start platform search
+  # Emoji buses using col widths to show time left
+  #     puts `tput cols`
   # Or other cool things
   # Look into syswide commands
+
+
 
 end
 
