@@ -36,7 +36,7 @@ alias nextBusWork='ruby ~/projects/busReader/main.rb'
 ```
 
 
-## Args
+### Args
 
 With no args provided it is hardcoded to a particular stop.
 
