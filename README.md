@@ -1,7 +1,5 @@
 
-
-
-Bus reader innit
+UPDATE 10/2021 Metro updated their api to be internal and has downscaled their external api to 181 stops :(
 
 
 # Bus Reader
